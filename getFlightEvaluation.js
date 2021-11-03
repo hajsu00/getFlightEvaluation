@@ -7,24 +7,30 @@
         event.record.ユーザー.disabled = true;
         
         //ログインユーザー名を取得
-        const studentName = event.record.ユーザー.value[0].name
-        //window.alert(studentName);    //デバッグ用
+        const userName = event.record.ユーザー.value[0].name
+        //window.alert(userName);    //デバッグ用
 
         //過去2年間のログインユーザーのログの有無を調べる
         // リクエストパラメータ
         const body = {
             "app": 8,
-            "id": 4367,
+            //"id": 4367,
+            "query": "order by $id desc limit 1 offset 0",
+            //"fields": ["$id"]
         };
         
         kintone.api(
-            kintone.api.url('/k/v1/record.json', true),
+            kintone.api.url('/k/v1/records.json', true),
             'GET',
             body,
             function(resp) {
                 // success:レコード番号を表示する
-                //alert(resp.record.$id.value);
-                alert(resp.record.前席.value[0].name);
+                const strID = resp.records[0].$id.value;
+                alert(strID);
+                //alert(resp.record.前席.value[0].name);
+                //let frontseatName = resp.record.前席.value[0].name
+                //alert(resp.record.日付.value);
+                //while (userName == frontseatName)
           }, function(resp) {
                 // error:エラーの場合はメッセージを表示する
                 const errmsg = 'レコード取得時にエラーが発生しました。';
@@ -33,7 +39,7 @@
                 errmsg += '\n' + resp.message;
             }
             //alert(errmsg);
-            alert(resp.record.$id.value);
+            //alert(resp.record.$id.value);
           }
         );
 
