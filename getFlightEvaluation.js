@@ -14,7 +14,7 @@
         // リクエストパラメータ
         const body = {
             "app": 8,
-            "id": 4370,
+            "id": 4367,
         };
         
         kintone.api(
@@ -23,7 +23,8 @@
             body,
             function(resp) {
                 // success:レコード番号を表示する
-                alert(resp.record.$id.value);
+                //alert(resp.record.$id.value);
+                alert(resp.record.前席.value[0].name);
           }, function(resp) {
                 // error:エラーの場合はメッセージを表示する
                 const errmsg = 'レコード取得時にエラーが発生しました。';
