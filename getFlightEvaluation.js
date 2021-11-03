@@ -8,16 +8,35 @@
         
         //ログインユーザー名を取得
         const studentName = event.record.ユーザー.value[0].name
-        window.alert(studentName);
+        //window.alert(studentName);    //デバッグ用
 
         //過去2年間のログインユーザーのログの有無を調べる
-/*
         // リクエストパラメータ
-        var body = {
-        'app': 8,   //アプリ「発行記録」のID
-        'id': 1
+        const body = {
+            "app": 8,
+            "id": 4370,
         };
         
+        kintone.api(
+            kintone.api.url('/k/v1/record.json', true),
+            'GET',
+            body,
+            function(resp) {
+                // success:レコード番号を表示する
+                alert(resp.record.$id.value);
+          }, function(resp) {
+                // error:エラーの場合はメッセージを表示する
+                const errmsg = 'レコード取得時にエラーが発生しました。';
+                // レスポンスにエラーメッセージが含まれる場合はメッセージを表示する
+                if (resp.message !== undefined) {
+                errmsg += '\n' + resp.message;
+            }
+            //alert(errmsg);
+            alert(resp.record.$id.value);
+          }
+        );
+
+/*
         kintone.api(
         kintone.api.url('/k/v1/record', true), // pathOrUrl
         'GET', // method
